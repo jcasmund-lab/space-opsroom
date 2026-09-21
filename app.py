@@ -189,15 +189,15 @@ def chip(text, level):
 
 def make_aoi_map(aoi, gps_pos, gal_pos):
     fig = go.Figure()
-    fig.add_trace(go.Scattermapbox(
+    fig.add_trace(go.Scattermap(
         lat=[c[1] for c in aoi["capitals"]], lon=[c[2] for c in aoi["capitals"]],
         mode="markers+text", marker={"size":7}, text=[c[0] for c in aoi["capitals"]],
         textposition="top right", hovertemplate="<b>%{text}</b><extra>Capital</extra>", name="Capitals"))
     if gps_pos:
-        fig.add_trace(go.Scattermapbox(lat=[p["lat"] for p in gps_pos], lon=[p["lon"] for p in gps_pos], mode="markers", marker={"size":4}, text=[p["name"] for p in gps_pos], hovertemplate="%{text}<extra>GPS</extra>", name="GPS"))
+        fig.add_trace(go.Scattermap(lat=[p["lat"] for p in gps_pos], lon=[p["lon"] for p in gps_pos], mode="markers", marker={"size":4}, text=[p["name"] for p in gps_pos], hovertemplate="%{text}<extra>GPS</extra>", name="GPS"))
     if gal_pos:
-        fig.add_trace(go.Scattermapbox(lat=[p["lat"] for p in gal_pos], lon=[p["lon"] for p in gal_pos], mode="markers", marker={"size":4}, text=[p["name"] for p in gal_pos], hovertemplate="%{text}<extra>Galileo</extra>", name="Galileo"))
-    fig.update_layout(mapbox={"style":"carto-darkmatter","center":aoi["center"],"zoom":aoi["zoom"]},height=325,margin={"l":0,"r":0,"t":0,"b":0},paper_bgcolor="#071019",font={"color":"#dce9f2","size":9},showlegend=False)
+        fig.add_trace(go.Scattermap(lat=[p["lat"] for p in gal_pos], lon=[p["lon"] for p in gal_pos], mode="markers", marker={"size":4}, text=[p["name"] for p in gal_pos], hovertemplate="%{text}<extra>Galileo</extra>", name="Galileo"))
+    fig.update_layout(map={"style":"carto-darkmatter","center":aoi["center"],"zoom":aoi["zoom"]},height=325,margin={"l":0,"r":0,"t":0,"b":0},paper_bgcolor="#071019",font={"color":"#dce9f2","size":9},showlegend=False)
     return fig
 
 kp_json, forecast_json, scales_json, noaa_errors = get_noaa()
